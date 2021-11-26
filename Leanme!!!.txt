@@ -1,0 +1,41 @@
+1) Agregar todos los archivos en una carpeta llamada main (importante)
+
+2) Abrir el archivo main.ino
+
+3) Este incluye un pequeño programa que inicializa el sensor y el monitor serial, y luego comienza a leer colores cada un segundo
+
+4) Para usarlo tal cual está, el TCS34725 debe estar conectado como sigue: 
+
+pin LED del sensor <-> pin 3 del Arduino
+pin SDA del sensor <-> pin A4 del Arduino
+pin SCL del sensor <-> pin A5 del Arduino
+pin 3V3 del sensor desconectado
+pin GND del sensor <-> uno de los pines GND del Arduino
+pin Vin del sensor <-> pin 5V del Arduino
+
+Es MUY ACONSEJABLE soldar la regleta de pines a los orificios del sensor. 
+Un falso contacto puede hacer que el sensor se apague y desconfigure, haciendo que el programa comience a funcionar erráticamente. 
+
+5) Conectar el Arduino al USB de la PC
+
+6) En Herramientas (tools) seleccionar:
+Placa: Arduino UNO
+Puerto: el que diga Arduino UNO (si no lo encontró, puede que tengan que actualizar algún driver.
+
+Pueden probar que esté conectado bien dándole a "Obtener información de la placa". Si muestra algo de información, están listos.
+
+7) Programar con el botón que es una flecha hacia la derecha. 
+
+8) La luz del sensor debería hacer un flash cada un segundo. 
+
+9) Abrir el monitor serial en Herramientas > Monitor Serial para ver los colores que obtiene el sensor. 
+
+10) Lean el código y traten de entenderlo (sobretodo las funciones de COLOR.cpp), porque van a necesitar modificarlo para hacer que haga lo que uds quieran. 
+
+11) Se puede conectar adicionalmente un LED externo para iluminar mejor el objeto que se está sensando. Usar el pin 9.
+
+12) En COLOR.h las constantes LED_EXT_ON y LED_EMB_ON controlan la intensidad de los LEDs y pueden modificarse.
+
+
+
+Mucho éxito! :)
