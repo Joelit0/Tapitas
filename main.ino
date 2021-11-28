@@ -1,11 +1,16 @@
 #include <string.h>
+#include <Servo.h>
 #include "COLOR.h"
+
 #define CALIBRAR 0
 #define CLASIFICAR 1
+
+Servo servoMotor;
 
 int wait = 5;
 int btn_pin = 12;
 int state = CALIBRAR;
+
 String leeCadena;
 
 int pin_1_PAP1 = 11;
@@ -43,83 +48,82 @@ void setup() {
   pinMode(pin_4_PAP2, OUTPUT);     // Pin 4 conectar a IN1
 
   pinMode(btn_pin, INPUT);
+
+  servoMotor.attach(9);
+  servoMotor.write(180);
 }
 
 void loop() {
-  actualizar_btn();
-  Serial. println(state);
+//  actualizar_btn();
+//  Serial. println(state);
+//
+//  if (state == CALIBRAR) {
+//    valor_potenciometro_PAP2 = map(analogRead(potenciometro_PAP2), 0, 1023, 0, 360);
+//
+//    if (valor_potenciometro_PAP2 != dato_rx_PAP2) {
+//      dato_rx_PAP2 = (valor_potenciometro_PAP2 * 1.4222222222);
+//
+//      while (dato_rx_PAP2 > numero_pasos_PAP2) {
+//        paso_izq(pin_1_PAP2, pin_2_PAP2, pin_3_PAP2, pin_4_PAP2);
+//        numero_pasos_PAP2 = numero_pasos_PAP2 + 1;
+//      }
+//
+//      while (dato_rx_PAP2 < numero_pasos_PAP2) {
+//        paso_der(pin_1_PAP2, pin_2_PAP2, pin_3_PAP2, pin_4_PAP2);
+//        numero_pasos_PAP2 = numero_pasos_PAP2 - 1;
+//      }
+//
+//      apagado(pin_1_PAP2, pin_2_PAP2, pin_3_PAP2, pin_4_PAP2);
+//    }
+//    
+//    delay(800);
+//
+//  } else if (state == CLASIFICAR) {
+//    sum_90();
+//    delay(1000);
 
-  if (state == CALIBRAR) {
-    valor_potenciometro_PAP1 = map(analogRead(potenciometro_PAP1), 0, 1023, 0, 360);
-
-    if (valor_potenciometro_PAP1 != dato_rx_PAP1) {
-      dato_rx_PAP1 = (valor_potenciometro_PAP1 * 1.4222222222);
-
-      while (dato_rx_PAP1 > numero_pasos_PAP1) {
-        paso_izq(pin_1_PAP1, pin_2_PAP1, pin_3_PAP1, pin_4_PAP1);
-        numero_pasos_PAP1 = numero_pasos_PAP1 + 1;
-      }
-
-      while (dato_rx_PAP1 < numero_pasos_PAP1) {
-        paso_der(pin_1_PAP1, pin_2_PAP1, pin_3_PAP1, pin_4_PAP1);
-        numero_pasos_PAP1 = numero_pasos_PAP1 - 1;
-      }
-    }
-
-    apagado(pin_1_PAP1, pin_2_PAP1, pin_3_PAP1, pin_4_PAP1);
-
-    valor_potenciometro_PAP2 = map(analogRead(potenciometro_PAP2), 0, 1023, 0, 360);
-
-    if (valor_potenciometro_PAP2 != dato_rx_PAP2) {
-      dato_rx_PAP2 = (valor_potenciometro_PAP2 * 1.4222222222);
-
-      while (dato_rx_PAP2 > numero_pasos_PAP2) {
-        paso_izq(pin_1_PAP2, pin_2_PAP2, pin_3_PAP2, pin_4_PAP2);
-        numero_pasos_PAP2 = numero_pasos_PAP2 + 1;
-      }
-
-      while (dato_rx_PAP2 < numero_pasos_PAP2) {
-        paso_der(pin_1_PAP2, pin_2_PAP2, pin_3_PAP2, pin_4_PAP2);
-        numero_pasos_PAP2 = numero_pasos_PAP2 - 1;
-      }
-
-      apagado(pin_1_PAP2, pin_2_PAP2, pin_3_PAP2, pin_4_PAP2);
+    for (int i = 20; i <= 180; i++) {
+      Serial.println(i);
+      servoMotor.write(i);
+      delay(10);
     }
     
-    delay(800);
-  } else if (state == CLASIFICAR) {
-    sum_90();
-    delay(1000);
-  
-    RGB_t c = COLOR_getRGB();
-    Serial.println (COLOR_getColorName());
-  
-    while (Serial.available()) {
-      char c  = Serial.read();
-      leeCadena += c;
+    for (int i = 180 ; i > 20l
+    ; i--) {
+      servoMotor.write(i);
+      delay(10);
     }
-  
-    if (leeCadena.length()>0){
-      dato_rx_PAP1 = leeCadena.toInt();
-      Serial.print(dato_rx_PAP1);
-      Serial.println("Grados");
-      delay(wait);
-      dato_rx_PAP1 = (dato_rx_PAP1 * 1.4222222222);
-    }
-  
-    while (dato_rx_PAP1 > numero_pasos_PAP1){
-      paso_izq(pin_1_PAP1, pin_2_PAP1, pin_3_PAP1, pin_4_PAP1);
-      numero_pasos_PAP1 = numero_pasos_PAP1 + 1;
-    }
-  
-    while (dato_rx_PAP1 < numero_pasos_PAP1){
-      paso_der(pin_1_PAP1, pin_2_PAP1, pin_3_PAP1, pin_4_PAP1);
-      numero_pasos_PAP1 = numero_pasos_PAP1 - 1;
-    }
-  
-    leeCadena = "";
-    apagado(pin_1_PAP1, pin_2_PAP1, pin_3_PAP1, pin_4_PAP1);
-  }
+
+//    RGB_t c = COLOR_getRGB();
+//    Serial.println (COLOR_getColorName());
+
+//  
+//    while (Serial.available()) {
+//      char c  = Serial.read();
+//      leeCadena += c;
+//    }
+//  
+//    if (leeCadena.length()>0){
+//      dato_rx_PAP1 = leeCadena.toInt();
+//      Serial.print(dato_rx_PAP1);
+//      Serial.println("Grados");
+//      delay(wait);
+//      dato_rx_PAP1 = (dato_rx_PAP1 * 1.4222222222);
+//    }
+//  
+//    while (dato_rx_PAP1 > numero_pasos_PAP1){
+//      paso_izq(pin_1_PAP1, pin_2_PAP1, pin_3_PAP1, pin_4_PAP1);
+//      numero_pasos_PAP1 = numero_pasos_PAP1 + 1;
+//    }
+//  
+//    while (dato_rx_PAP1 < numero_pasos_PAP1){
+//      paso_der(pin_1_PAP1, pin_2_PAP1, pin_3_PAP1, pin_4_PAP1);
+//      numero_pasos_PAP1 = numero_pasos_PAP1 - 1;
+//    }
+//  
+//    leeCadena = "";
+//    apagado(pin_1_PAP1, pin_2_PAP1, pin_3_PAP1, pin_4_PAP1);
+//  }
 }
 
 void actualizar_btn() {

@@ -3,13 +3,13 @@
 
 // pines donde están conectados los leds
 #define OUT_LED_EMB 3 // led embebido en el sensor
-#define OUT_LED_EXT 9 // led externo
+#define OUT_LED_EXT 13 // led externo
 
 
 // intensidad de los leds. 0 es apagado, 255 es la máxima intensidad.
-#define LED_OFF 0
-#define LED_EMB_ON 32
-#define LED_EXT_ON 128
+#define LED_OFF 1
+#define LED_EMB_ON 0
+#define LED_EXT_ON 0
 
 
 #define MAX_HUE_ROJO 14
